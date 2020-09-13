@@ -6,6 +6,8 @@
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <import resource="springServicesConfiguration.xml" />
+    <import resource="springDataConfiguration.xml" />
     <context:annotation-config/>
     <mvc:resources mapping="resources/**" location="resources/"/>
     <mvc:annotation-driven/>
@@ -17,4 +19,15 @@
        <property name="suffix" value=".jsp"/>
    </bean>
 
+    <bean name="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basenames">
+            <value>classpath:messages/errors</value>
+        </property>
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="fallbackToSystemLocale" value="false"/>
+    </bean>
+
+    <bean name="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+        <property name="defaultLocale" value="ru"/>
+    </bean>
 </beans>
