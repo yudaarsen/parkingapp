@@ -31,7 +31,7 @@
                <forn:errors path="midName" /><br/>
                Адрес электронной почты:<form:input path="email" />
                <form:errors path="email"/><br/>
-               Пароль:<form:input path="password" />
+               Пароль:<form:input path="password" type="password" />
                <form:errors path="password" /> <br/>
                <button type="submit">Отправить</button>
            </form:form>

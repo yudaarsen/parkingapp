@@ -1,5 +1,7 @@
 package ru.ikbo1018.app.models.account;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Account {
@@ -9,6 +11,7 @@ public class Account {
     private String midName;
     private String email;
     private String password;
+    @DateTimeFormat(pattern = "MM/dd/YYYY")
     private Date regDate;
 
     public int getId() {
@@ -24,7 +27,8 @@ public class Account {
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        String tmp = firstName.toLowerCase();
+        this.firstName = tmp.substring(0, 1).toUpperCase() + tmp.substring(1);
     }
 
     public String getLastName() {
@@ -32,7 +36,8 @@ public class Account {
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        String tmp = lastName.toLowerCase();
+        this.lastName = tmp.substring(0,1).toUpperCase() + tmp.substring(1);
     }
 
     public String getMidName() {
@@ -40,7 +45,8 @@ public class Account {
     }
 
     public void setMidName(String midName) {
-        this.midName = midName;
+        String tmp = midName.toLowerCase();
+        this.midName = tmp.substring(0, 1).toUpperCase() + tmp.substring(1);
     }
 
     public String getEmail() {
