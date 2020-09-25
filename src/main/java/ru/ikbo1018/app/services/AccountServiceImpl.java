@@ -14,4 +14,21 @@ public class AccountServiceImpl implements AccountService{
     public void createAccount(Account account) {
        repository.createAccount(account);
     }
+
+    public boolean isAccountExists(String email) {
+        try {
+            Account account = repository.getByEmail(email);
+            return true;
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+    }
+
+    public Account login(String email, String password) throws IllegalArgumentException {
+        Account account = repository.getByEmail(email);
+        if(account.getPassword().equals(password))
+            return account;
+        else
+            throw new IllegalArgumentException("Incorrect password");
+    }
 }

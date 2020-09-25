@@ -1,6 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="forn" uri="http://www.springframework.org/tags/form" %>
 <c:url value="resources/js/jquery-3.5.1.min.js" var="jquery"/>
 <c:url value="resources/css/registration/style.css" var="style"/>
 <c:url value="resources/js/registration/registration.js" var="registrationScript"/>

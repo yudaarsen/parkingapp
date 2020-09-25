@@ -1,6 +1,7 @@
 package ru.ikbo1018.app.models.account;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import ru.ikbo1018.app.models.AccountRole;
 
 import java.util.Date;
 
@@ -13,6 +14,7 @@ public class Account {
     private String password;
     @DateTimeFormat(pattern = "MM/dd/YYYY")
     private Date regDate;
+    private AccountRole accountRole;
 
     public int getId() {
         return id;
@@ -47,6 +49,14 @@ public class Account {
     public void setMidName(String midName) {
         String tmp = midName.toLowerCase();
         this.midName = tmp.substring(0, 1).toUpperCase() + tmp.substring(1);
+    }
+
+    public AccountRole getAccountRole() {
+        return accountRole;
+    }
+
+    public void setAccountRole(AccountRole accountRole) {
+        this.accountRole = accountRole;
     }
 
     public String getEmail() {
