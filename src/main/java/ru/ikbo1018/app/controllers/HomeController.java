@@ -11,9 +11,4 @@ public class HomeController {
     public String home(){
         return "home";
     }
-
-    @ModelAttribute("accountId")
-    public int accountId() {
-        return 0;
-    }
 }

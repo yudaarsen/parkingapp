@@ -21,7 +21,9 @@
                 <h2>Быстро и легко.</h2>
             </div>
            <form:form modelAttribute="account">
-               <form:errors />
+               <c:if test="${error != null}">
+                   <c:out value="${error}" /><br/>
+               </c:if>
                Имя:<form:input path="firstName" />
                <form:errors path="firstName" /><br/>
                Фамилия:<form:input path="lastName" />

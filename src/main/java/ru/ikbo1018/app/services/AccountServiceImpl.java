@@ -17,7 +17,7 @@ public class AccountServiceImpl implements AccountService{
 
     public boolean isAccountExists(String email) {
         try {
-            Account account = repository.getByEmail(email);
+            repository.getByEmail(email);
             return true;
         } catch (IllegalArgumentException e) {
             return false;
@@ -30,5 +30,9 @@ public class AccountServiceImpl implements AccountService{
             return account;
         else
             throw new IllegalArgumentException("Incorrect password");
+    }
+
+    public Account getAccountById(int id) throws IllegalArgumentException {
+        return repository.getById(id);
     }
 }

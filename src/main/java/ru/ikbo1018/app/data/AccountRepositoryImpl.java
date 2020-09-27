@@ -31,7 +31,7 @@ public class AccountRepositoryImpl implements AccountRepository{
         return result.get(0);
     }
 
-    public Account getById(String id) throws IllegalArgumentException {
+    public Account getById(int id) throws IllegalArgumentException {
         List<Account> result = jdbcTemplate.query(SQL_GET_BY_ID, rowMapper, id);
         if(result.isEmpty()) {
             throw new IllegalArgumentException("Account with the specified id not found");
