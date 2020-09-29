@@ -6,4 +6,5 @@ public interface AccountService {
     void createAccount(Account account);
     Account login(String email, String password) throws IllegalArgumentException;
     Account getAccountById(int id) throws IllegalArgumentException;
+    void updateAccount(Account account) throws IllegalArgumentException;
 }

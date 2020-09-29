@@ -46,6 +46,6 @@ public class AccountRepositoryImpl implements AccountRepository{
 
     public void updateAccount(Account account) {
         jdbcTemplate.update(SQL_UPDATE, account.getFirstName(), account.getLastName(), account.getMidName(),
-                account.getPassword(), account.getAccountRole().getId());
+                account.getPassword(), account.getAccountRole().getId(), account.getId());
     }
 }

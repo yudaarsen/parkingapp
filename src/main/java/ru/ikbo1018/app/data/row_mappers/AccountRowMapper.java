@@ -27,7 +27,7 @@ public class AccountRowMapper implements RowMapper<Account> {
         account.setRegDate(resultSet.getDate("reg_date"));
         AccountRole accountRole = new AccountRole();
         try {
-            accountRole = accountRoleRepository.getAccountRoleById(account.getId());
+            accountRole = accountRoleRepository.getAccountRoleById(resultSet.getInt("account_role"));
         } catch (IllegalArgumentException e) {}
         account.setAccountRole(accountRole);
         return account;

@@ -36,7 +36,7 @@ public class RegistrationController {
     private MessageSource messageSource;
 
     @InitBinder
-    public void DataBinding(WebDataBinder webDataBinder) {
+    public void dataBinding(WebDataBinder webDataBinder) {
         webDataBinder.addValidators(validator);
     }
 

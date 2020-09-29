@@ -16,7 +16,8 @@
 <section id="main">
     <div class="container">
         <div class="information">
-            <form:form id="form" method="POST" modelAttribute="accountInfo">
+            <form:form id="form" method="POST" modelAttribute="accountInfo" action="lk/update">
+                <form:errors path="*" />
                 <div class="firstName">
                     <form:input path="firstName"/>
                 </div>
@@ -27,10 +28,10 @@
                     <form:input path="midName" />
                 </div>
                 <div class="email">
-                    <form:input path="email" />
+                    <form:input path="email" readonly="true"/>
                 </div>
                 <div class="regDate">
-                    <form:input path="regDate" />
+                    <form:input path="regDate" readonly="true"/>
                 </div>
                 <div class="buttons">
                     <input type="submit" id="submit_button" value="Сохранить">
