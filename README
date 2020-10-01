@@ -1,0 +1,6 @@
+Инструкция по запуску системы:
+
+1. Перейти в пустую директорию и ввести git clone https://github.com/yudaarsen/parkingapp.git
+2. Перейти в созданную папку parkingapp и ввести команду mvn package
+3. Скопировать созданный файл с расширением .war из папки target в папку ApacheTomcat/webapps/parkingapp
+4. Запустить Apache Tomcat и ввести в веб-браузере адрес localhost:8080
