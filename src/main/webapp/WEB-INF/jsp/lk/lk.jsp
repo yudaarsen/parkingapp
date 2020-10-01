@@ -17,7 +17,9 @@
     <div class="container">
         <div class="information">
             <form:form id="form" method="POST" modelAttribute="accountInfo" action="lk/update">
-                <form:errors path="*" />
+                <form:errors path="firstName" />
+                <form:errors path="lastName" />
+                <form:errors path="midName" />
                 <div class="firstName">
                     <form:input path="firstName"/>
                 </div>

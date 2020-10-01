@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
@@ -29,8 +31,9 @@ public class LkController {
     @Qualifier("accountValidator")
     private Validator accountValidator;
 
-    @InitBinder
-    public void dataBind(WebDataBinder webDataBinder) {
+    @InitBinder("accountInfo")
+    public void dataBinder(WebDataBinder webDataBinder) {
+        webDataBinder.addValidators(accountValidator);
     }
 
     @GetMapping
@@ -39,8 +42,10 @@ public class LkController {
         if(accountId == null)
             return "redirect:/";
         try {
-            Account account = accountService.getAccountById(accountId);
-            model.addAttribute("accountInfo", account);
+            if(!model.containsAttribute("accountInfo")) {
+                Account account = accountService.getAccountById(accountId);
+                model.addAttribute("accountInfo", account);
+            }
             return "lk/lk";
         } catch (IllegalArgumentException e) {
             session.removeAttribute("accountId");
@@ -49,14 +54,20 @@ public class LkController {
     }
 
     @PostMapping(value = "/update")
-    public String updateAccount(@ModelAttribute("accountInfo") Account account, HttpSession session,
-                                RedirectAttributes redirectAttributes) {
+    public String updateAccount(@Validated @ModelAttribute(name = "accountInfo") Account accountInfo, BindingResult result,
+                                HttpSession session, RedirectAttributes redirectAttributes) {
+        if(result.getFieldErrorCount("firstName") > 0 || result.getFieldErrorCount("lastName") > 0
+                || result.getFieldErrorCount("midName") > 0) {
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.accountInfo", result);
+            redirectAttributes.addFlashAttribute("accountInfo", accountInfo);
+            return "redirect:/lk";
+        }
         try {
             Integer accountId = (Integer) session.getAttribute("accountId");
             Account currentAccount = accountService.getAccountById(accountId);
-            currentAccount.setFirstName(account.getFirstName());
-            currentAccount.setLastName(account.getLastName());
-            currentAccount.setMidName(account.getMidName());
+            currentAccount.setFirstName(accountInfo.getFirstName());
+            currentAccount.setLastName(accountInfo.getLastName());
+            currentAccount.setMidName(accountInfo.getMidName());
             accountService.updateAccount(currentAccount);
             return "redirect:/lk";
         } catch (IllegalArgumentException e) {
