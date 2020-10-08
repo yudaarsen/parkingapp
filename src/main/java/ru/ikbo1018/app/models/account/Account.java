@@ -14,7 +14,7 @@ public class Account {
     private String password;
     @DateTimeFormat(pattern = "MM/dd/YYYY")
     private Date regDate;
-    private AccountRole accountRole;
+    private int accountRoleId;
 
     public int getId() {
         return id;
@@ -51,12 +51,12 @@ public class Account {
         this.midName = tmp.substring(0, 1).toUpperCase() + tmp.substring(1);
     }
 
-    public AccountRole getAccountRole() {
-        return accountRole;
+    public int getAccountRoleId() {
+        return accountRoleId;
     }
 
-    public void setAccountRole(AccountRole accountRole) {
-        this.accountRole = accountRole;
+    public void setAccountRoleId(int accountRoleId) {
+        this.accountRoleId = accountRoleId;
     }
 
     public String getEmail() {

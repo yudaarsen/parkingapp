@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface AppealService {
     List<Appeal> getAccountAppeals(int accountId) throws IllegalArgumentException;
+    Appeal createAppeal(Appeal appeal) throws IllegalArgumentException;
 }

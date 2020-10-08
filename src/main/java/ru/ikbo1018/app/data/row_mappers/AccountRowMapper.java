@@ -13,9 +13,6 @@ import java.sql.SQLException;
 @Component
 public class AccountRowMapper implements RowMapper<Account> {
 
-    @Autowired
-    private AccountRoleRepository accountRoleRepository;
-
     public Account mapRow(ResultSet resultSet, int i) throws SQLException {
         Account account = new Account();
         account.setId(resultSet.getInt("id"));
@@ -25,11 +22,7 @@ public class AccountRowMapper implements RowMapper<Account> {
         account.setEmail(resultSet.getString("email"));
         account.setPassword(resultSet.getString("password"));
         account.setRegDate(resultSet.getDate("reg_date"));
-        AccountRole accountRole = new AccountRole();
-        try {
-            accountRole = accountRoleRepository.getAccountRoleById(resultSet.getInt("account_role"));
-        } catch (IllegalArgumentException e) {}
-        account.setAccountRole(accountRole);
+        account.setAccountRoleId(resultSet.getInt("account_role"));
         return account;
     }
 }

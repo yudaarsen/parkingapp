@@ -38,10 +38,8 @@ public class LkController {
 
     @GetMapping
     public String lk(HttpSession session, Model model){
-        Integer accountId = (Integer)session.getAttribute("accountId");
-        if(accountId == null)
-            return "redirect:/";
         try {
+            Integer accountId = (Integer) session.getAttribute("accountId");
             if(!model.containsAttribute("accountInfo")) {
                 Account account = accountService.getAccountById(accountId);
                 model.addAttribute("accountInfo", account);

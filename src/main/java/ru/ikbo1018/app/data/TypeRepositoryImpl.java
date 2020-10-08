@@ -12,6 +12,7 @@ import java.util.List;
 public class TypeRepositoryImpl implements TypeRepository{
 
     private static final String SQL_GET_BY_ID = "SELECT * FROM type WHERE id = ?";
+    private static final String SQL_GET_ALL = "SELECT * FROM type";
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -24,5 +25,10 @@ public class TypeRepositoryImpl implements TypeRepository{
         if(result.isEmpty())
             throw new IllegalArgumentException("Type with the specified id does not exists");
         return result.get(0);
+    }
+
+    @Override
+    public List<Type> getAll() {
+        return jdbcTemplate.query(SQL_GET_ALL, rowMapper);
     }
 }

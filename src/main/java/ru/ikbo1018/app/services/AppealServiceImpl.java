@@ -16,4 +16,9 @@ public class AppealServiceImpl implements AppealService{
     public List<Appeal> getAccountAppeals(int accountId) throws IllegalArgumentException {
         return repository.getAccountAppealsById(accountId);
     }
+
+    @Override
+    public Appeal createAppeal(Appeal appeal) throws IllegalArgumentException {
+        return repository.create(appeal);
+    }
 }

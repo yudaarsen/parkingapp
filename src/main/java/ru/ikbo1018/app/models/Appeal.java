@@ -6,14 +6,14 @@ import java.util.Date;
 
 public class Appeal {
     private int id;
-    private Account account;
+    private int accountId;
     private Date sendDate;
-    private Status status;
+    private int statusId;
     private Date checkDate;
-    private Account operator;
+    private int operatorId;
     private String appealText;
     private String answerText;
-    private Type type;
+    private int typeId;
     private String address;
 
     public int getId() {
@@ -24,14 +24,6 @@ public class Appeal {
         this.id = id;
     }
 
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
-
     public Date getSendDate() {
         return sendDate;
     }
@@ -40,28 +32,12 @@ public class Appeal {
         this.sendDate = sendDate;
     }
 
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
     public Date getCheckDate() {
         return checkDate;
     }
 
     public void setCheckDate(Date checkDate) {
         this.checkDate = checkDate;
-    }
-
-    public Account getOperator() {
-        return operator;
-    }
-
-    public void setOperator(Account operator) {
-        this.operator = operator;
     }
 
     public String getAppealText() {
@@ -80,12 +56,20 @@ public class Appeal {
         this.answerText = answerText;
     }
 
-    public Type getType() {
-        return type;
+    public int getStatusId() {
+        return statusId;
     }
 
-    public void setType(Type type) {
-        this.type = type;
+    public void setStatusId(int statusId) {
+        this.statusId = statusId;
+    }
+
+    public int getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(int typeId) {
+        this.typeId = typeId;
     }
 
     public String getAddress() {
@@ -94,5 +78,21 @@ public class Appeal {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public int getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
+    }
+
+    public int getOperatorId() {
+        return operatorId;
+    }
+
+    public void setOperatorId(int operatorId) {
+        this.operatorId = operatorId;
     }
 }
