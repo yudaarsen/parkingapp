@@ -21,4 +21,9 @@ public class AppealServiceImpl implements AppealService{
     public Appeal createAppeal(Appeal appeal) throws IllegalArgumentException {
         return repository.create(appeal);
     }
+
+    @Override
+    public Appeal getAppeal(int appealId) throws IllegalArgumentException {
+        return repository.getAppeal(appealId);
+    }
 }

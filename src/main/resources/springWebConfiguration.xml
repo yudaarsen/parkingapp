@@ -45,6 +45,7 @@
             <mvc:mapping path="/lk"/>
             <mvc:mapping path="/appeal"/>
             <mvc:mapping path="/appeal/*"/>
+            <mvc:mapping path="/image/*"/>
             <bean class="ru.ikbo1018.app.interceptors.AuthInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>

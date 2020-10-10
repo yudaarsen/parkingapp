@@ -1,7 +1,6 @@
 package ru.ikbo1018.app.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,7 +13,6 @@ import ru.ikbo1018.app.services.AppealService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.sql.rowset.serial.SerialBlob;
 import java.util.List;
 
 @Controller
@@ -37,10 +35,21 @@ public class AppealController {
         return "appeal/appeal";
     }
 
-    @GetMapping("/{id}")
-    @ResponseBody
-    public String showAppeal(@PathVariable("id") int appealId) {
-        return "Id = " + appealId;
+    @GetMapping(value = "/get/{id}")
+    public String showAppeal(@PathVariable("id") int appealId, HttpServletRequest request) {
+        try {
+            Appeal appeal = appealService.getAppeal(appealId);
+            request.setAttribute("appeal", appeal);
+        } catch (IllegalArgumentException e) {
+            return "redirect:/lk";
+        }
+        try {
+            List<Image> images = imageRepository.getAppealImages(appealId);
+            request.setAttribute("images", images);
+            return "appeal/view";
+        } catch (IllegalArgumentException e) {
+            return "appeal/view";
+        }
     }
 
     @PostMapping
@@ -70,5 +79,12 @@ public class AppealController {
             e.printStackTrace();
             return "redirect:/";
         }
+    }
+
+    @GetMapping(value = "/list", produces = "application/json")
+    @ResponseBody
+    public List<Appeal> getAppeals(HttpSession session) {
+        Integer accountId = (Integer)session.getAttribute("accountId");
+        return appealService.getAccountAppeals(accountId);
     }
 }

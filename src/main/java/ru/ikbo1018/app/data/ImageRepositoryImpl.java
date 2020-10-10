@@ -12,11 +12,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 @Component
 public class ImageRepositoryImpl implements ImageRepository{
 
     private static final String SQL_CREATE_IMAGE = "INSERT INTO image VALUES (DEFAULT, ?, ?) RETURNING *";
+    private static final String SQL_GET_IMAGES = "SELECT * FROM image WHERE appeal_id = ?";
+    private static final String SQL_GET_IMAGE = "SELECT * FROM image WHERE id = ?";
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -49,5 +52,27 @@ public class ImageRepositoryImpl implements ImageRepository{
             }
         });
         return result;
+    }
+
+    @Override
+    public List<Image> getAppealImages(int appealId) throws IllegalArgumentException {
+        if(appealId <= 0)
+            throw new IllegalArgumentException("Incorrect appeal id");
+        try {
+            return jdbcTemplate.query(SQL_GET_IMAGES, new Object[] {appealId}, rowMapper);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Images for specified appeal are not found");
+        }
+    }
+
+    @Override
+    public Image getImage(int imageId) throws IllegalArgumentException {
+        if(imageId <= 0)
+            throw new IllegalArgumentException("Incorrect image id");
+        try {
+            return jdbcTemplate.query(SQL_GET_IMAGE, new Object[] {imageId}, rowMapper).get(0);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Image with specified id does not exist");
+        }
     }
 }

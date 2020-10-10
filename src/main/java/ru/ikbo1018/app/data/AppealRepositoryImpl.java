@@ -16,9 +16,7 @@ public class AppealRepositoryImpl implements AppealRepository{
     private static final String SQL_APPEALS_BY_ACCOUNT_ID = "SELECT * FROM appeal WHERE account_id = ?";
     private static final String SQL_CREATE_APPEAL = "INSERT INTO appeal VALUES (DEFAULT, ?, DEFAULT, " +
             "?, DEFAULT, DEFAULT, ?, DEFAULT, ?, ?) RETURNING *";
-
-    @Value("${appealDefaultType}")
-    private int defaultType;
+    private static final String SQL_GET_APPEAL = "SELECT * FROM appeal WHERE id = ?";
 
     @Value("${appealDefaultStatus}")
     private int defaultStatus;
@@ -40,5 +38,16 @@ public class AppealRepositoryImpl implements AppealRepository{
         return jdbcTemplate.query(SQL_CREATE_APPEAL, new Object[] {appeal.getAccountId(),
                         defaultStatus, appeal.getAppealText(), appeal.getTypeId(), appeal.getAddress()},
                         rowMapper).get(0);
+    }
+
+    @Override
+    public Appeal getAppeal(int appealId) throws IllegalArgumentException {
+        if(appealId <= 0)
+            throw new IllegalArgumentException("Incorrect appeal id");
+        try {
+            return jdbcTemplate.query(SQL_GET_APPEAL, new Object[]{appealId}, rowMapper).get(0);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Appeal with the specified id does not exist");
+        }
     }
 }
