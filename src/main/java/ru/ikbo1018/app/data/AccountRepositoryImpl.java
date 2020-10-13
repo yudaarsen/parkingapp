@@ -23,7 +23,7 @@ public class AccountRepositoryImpl implements AccountRepository{
     private static final String SQL_UPDATE = "UPDATE account SET first_name = ?, last_name = ?, mid_name = ?," +
             "password = ?, account_role = ? WHERE id = ?";
 
-    public Account getByEmail(String email) throws IllegalArgumentException {
+    public Account getByEmail(final String email) throws IllegalArgumentException {
         List<Account> result = jdbcTemplate.query(SQL_GET_BY_EMAIL, rowMapper, email);
         if(result.isEmpty()) {
             throw new IllegalArgumentException("Account with the specified email not found");
@@ -31,7 +31,7 @@ public class AccountRepositoryImpl implements AccountRepository{
         return result.get(0);
     }
 
-    public Account getById(String id) throws IllegalArgumentException {
+    public Account getById(int id) throws IllegalArgumentException {
         List<Account> result = jdbcTemplate.query(SQL_GET_BY_ID, rowMapper, id);
         if(result.isEmpty()) {
             throw new IllegalArgumentException("Account with the specified id not found");
@@ -39,13 +39,13 @@ public class AccountRepositoryImpl implements AccountRepository{
         return result.get(0);
     }
 
-    public void createAccount(Account account) {
+    public void createAccount(final Account account) {
         jdbcTemplate.update(SQL_CREATE, account.getFirstName(), account.getLastName(), account.getMidName(),
                 account.getEmail(), account.getPassword());
     }
 
-    public void updateAccount(Account account) {
+    public void updateAccount(final Account account) {
         jdbcTemplate.update(SQL_UPDATE, account.getFirstName(), account.getLastName(), account.getMidName(),
-                account.getPassword(), account.getAccountRole().getId());
+                account.getPassword(), account.getAccountRoleId(), account.getId());
     }
 }

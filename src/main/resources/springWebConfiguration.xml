@@ -9,9 +9,11 @@
     <import resource="springServicesConfiguration.xml" />
     <import resource="springDataConfiguration.xml" />
     <context:annotation-config/>
+    <mvc:default-servlet-handler />
     <mvc:resources mapping="resources/**" location="resources/"/>
     <mvc:annotation-driven/>
-    <context:component-scan base-package="ru.ikbo1018.app.controllers, ru.ikbo1018.app.interceptors, ru.ikbo1018.app.validators"/>
+    <context:component-scan base-package="ru.ikbo1018.app.controllers, ru.ikbo1018.app.interceptors,
+     ru.ikbo1018.app.validators, ru.ikbo1018.app.interceptors, ru.ikbo1018.app.models.factories"/>
 
    <bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">
        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
@@ -30,4 +32,26 @@
     <bean name="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
         <property name="defaultLocale" value="ru"/>
     </bean>
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="maxUploadSize" value="20971520"/>
+    </bean>
+
+    <context:property-placeholder location="classpath:config.properties"/>
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/lk"/>
+            <mvc:mapping path="/appeal"/>
+            <mvc:mapping path="/appeal/*"/>
+            <mvc:mapping path="/image/*"/>
+            <bean class="ru.ikbo1018.app.interceptors.AuthInterceptor" />
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/appeal/check/*"/>
+            <mvc:mapping path="/appeal/operator"/>
+            <bean class="ru.ikbo1018.app.interceptors.ModerateInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>

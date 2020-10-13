@@ -4,6 +4,7 @@ import ru.ikbo1018.app.models.account.Account;
 
 public interface AccountService {
     void createAccount(Account account);
-    boolean isAccountExists(String email);
     Account login(String email, String password) throws IllegalArgumentException;
+    Account getAccountById(int id) throws IllegalArgumentException;
+    void updateAccount(Account account) throws IllegalArgumentException;
 }

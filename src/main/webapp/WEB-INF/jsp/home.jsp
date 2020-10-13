@@ -20,7 +20,7 @@
                 <c:out value="${errorMessage}"/>
             </c:if>
             <c:choose>
-                <c:when test="${accountId <= 0}">
+                <c:when test="${accountId == null || accountId <= 0}">
                     <div class="login_form">
                         <form:form action="/login" method="POST">
                             <form:errors path="*"/>
@@ -31,7 +31,9 @@
                             <div class="buttons">
                                 <input class="button" id="login_button" value="Вход" type="submit" />
                                 <p>или</p>
-                                <button class="button" id="register_button" name="register_button">Регистрация</button>
+                                <a href="/registration">
+                                    <button class="button" id="register_button" name="register_button">Регистрация</button>
+                                </a>
                             </div>
                         </form:form>
                     </div>

@@ -1,11 +1,10 @@
 package ru.ikbo1018.app.models.account;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import ru.ikbo1018.app.models.AccountRole;
 
 import java.util.Date;
 
-public class Account {
+public abstract class Account {
     private int id;
     private String firstName;
     private String lastName;
@@ -14,7 +13,7 @@ public class Account {
     private String password;
     @DateTimeFormat(pattern = "MM/dd/YYYY")
     private Date regDate;
-    private AccountRole accountRole;
+    private int accountRoleId;
 
     public int getId() {
         return id;
@@ -29,6 +28,10 @@ public class Account {
     }
 
     public void setFirstName(String firstName) {
+        if(firstName.length() == 0) {
+            this.firstName = "";
+            return;
+        }
         String tmp = firstName.toLowerCase();
         this.firstName = tmp.substring(0, 1).toUpperCase() + tmp.substring(1);
     }
@@ -38,6 +41,10 @@ public class Account {
     }
 
     public void setLastName(String lastName) {
+        if(lastName.length() == 0) {
+            this.lastName = "";
+            return;
+        }
         String tmp = lastName.toLowerCase();
         this.lastName = tmp.substring(0,1).toUpperCase() + tmp.substring(1);
     }
@@ -51,12 +58,12 @@ public class Account {
         this.midName = tmp.substring(0, 1).toUpperCase() + tmp.substring(1);
     }
 
-    public AccountRole getAccountRole() {
-        return accountRole;
+    public int getAccountRoleId() {
+        return accountRoleId;
     }
 
-    public void setAccountRole(AccountRole accountRole) {
-        this.accountRole = accountRole;
+    public void setAccountRoleId(int accountRoleId) {
+        this.accountRoleId = accountRoleId;
     }
 
     public String getEmail() {
@@ -82,4 +89,6 @@ public class Account {
     public void setRegDate(Date regDate) {
         this.regDate = regDate;
     }
+
+    public abstract boolean moderate();
 }
