@@ -11,7 +11,7 @@
     <bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.postgresql.Driver"/>
         <property name="username" value="yuudai" />
-        <property name="password" value="danse321" />
+        <property name="password" value="password" />
         <property name="url" value="jdbc:postgresql://localhost:5432/parkingapp" />
     </bean>
 
