@@ -2,6 +2,7 @@ package ru.ikbo1018.app.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.ikbo1018.app.data.AccountRepository;
 import ru.ikbo1018.app.models.account.Account;
+import ru.ikbo1018.app.models.account.User;
+import ru.ikbo1018.app.models.factories.AccountFactory;
 import ru.ikbo1018.app.services.AccountService;
 import ru.ikbo1018.app.validators.AccountValidator;
 
@@ -34,6 +37,12 @@ public class RegistrationController {
 
     @Autowired
     private MessageSource messageSource;
+
+    @Value("${userRoleId}")
+    private int userRoleId;
+
+    @Autowired
+    private AccountFactory accountFactory;
 
     @InitBinder
     public void dataBinding(WebDataBinder webDataBinder) {
@@ -65,6 +74,6 @@ public class RegistrationController {
 
     @ModelAttribute(name = "account")
     public Account account() {
-        return new Account();
+        return accountFactory.create(userRoleId);
     }
 }

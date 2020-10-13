@@ -12,6 +12,7 @@ import java.util.List;
 public class StatusRepositoryImpl implements StatusRepository{
 
     private static final String SQL_GET_BY_ID = "SELECT * FROM status WHERE id = ?";
+    private static final String SQL_GET_ALL = "SELECT * FROM status";
 
     @Autowired
     private RowMapper<Status> rowMapper;
@@ -24,5 +25,10 @@ public class StatusRepositoryImpl implements StatusRepository{
         if(result.isEmpty())
             throw new IllegalArgumentException("Status with the specified id does not exist");
         return result.get(0);
+    }
+
+    @Override
+    public List<Status> getAll() {
+        return jdbcTemplate.query(SQL_GET_ALL, rowMapper);
     }
 }

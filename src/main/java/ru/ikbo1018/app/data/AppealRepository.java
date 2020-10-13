@@ -8,4 +8,6 @@ public interface AppealRepository {
     List<Appeal> getAccountAppealsById(int accountId) throws IllegalArgumentException;
     Appeal create(final Appeal appeal) throws IllegalArgumentException;
     Appeal getAppeal(int appealId) throws IllegalArgumentException;
+    Appeal updateAppeal(Appeal appeal) throws IllegalArgumentException;
+    Appeal getUncheckedAppeal() throws IllegalArgumentException;
 }

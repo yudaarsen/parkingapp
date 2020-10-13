@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import ru.ikbo1018.app.data.AccountRoleRepository;
 import ru.ikbo1018.app.models.AccountRole;
 import ru.ikbo1018.app.models.account.Account;
+import ru.ikbo1018.app.models.factories.AccountFactory;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,8 +14,12 @@ import java.sql.SQLException;
 @Component
 public class AccountRowMapper implements RowMapper<Account> {
 
+    @Autowired
+    private AccountFactory accountFactory;
+
     public Account mapRow(ResultSet resultSet, int i) throws SQLException {
-        Account account = new Account();
+        int accountRole = resultSet.getInt("account_role");
+        Account account = accountFactory.create(accountRole);
         account.setId(resultSet.getInt("id"));
         account.setFirstName(resultSet.getString("first_name"));
         account.setLastName(resultSet.getString("last_name"));
@@ -22,7 +27,7 @@ public class AccountRowMapper implements RowMapper<Account> {
         account.setEmail(resultSet.getString("email"));
         account.setPassword(resultSet.getString("password"));
         account.setRegDate(resultSet.getDate("reg_date"));
-        account.setAccountRoleId(resultSet.getInt("account_role"));
+        account.setAccountRoleId(accountRole);
         return account;
     }
 }

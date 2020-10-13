@@ -13,7 +13,7 @@
     <mvc:resources mapping="resources/**" location="resources/"/>
     <mvc:annotation-driven/>
     <context:component-scan base-package="ru.ikbo1018.app.controllers, ru.ikbo1018.app.interceptors,
-     ru.ikbo1018.app.validators, ru.ikbo1018.app.interceptors"/>
+     ru.ikbo1018.app.validators, ru.ikbo1018.app.interceptors, ru.ikbo1018.app.models.factories"/>
 
    <bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">
        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
@@ -47,6 +47,11 @@
             <mvc:mapping path="/appeal/*"/>
             <mvc:mapping path="/image/*"/>
             <bean class="ru.ikbo1018.app.interceptors.AuthInterceptor" />
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/appeal/check/*"/>
+            <mvc:mapping path="/appeal/operator"/>
+            <bean class="ru.ikbo1018.app.interceptors.ModerateInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>
 </beans>

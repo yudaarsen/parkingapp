@@ -13,20 +13,18 @@
     <div class="container">
         <div class="info">
             <div class="info_text">
-                <h1>Информация об обращении</h1>
-                ${appeal.getAppealText()}
+                ${appeal.getId()} <!-- номер обращения -->
+                ${appeal.getSendDate()} <!-- дата подачи -->
+                ${appeal.getCheckDate()} <!-- дата проверки -->
+                ${appeal.getAddress()} <!-- адрес -->
+                ${appeal.getAppealText()} <!-- текст обращения -->
+                ${appeal.getAnswerText()} <!-- текст ответа -->
+                ${type} <!-- тип нарушения -->
+                <!-- картинки -->
                 <c:forEach items="${images}" var="image">
                     <img src="/image/${image.getId()}" />
                 </c:forEach>
-                <h1>Материалы</h1>
             </div>
-            <div class="info_image">
-
-            </div>
-            <div class="reject_button">
-
-            </div>
-            <div id="warning"></div>
         </div>
     </div>
 </section>

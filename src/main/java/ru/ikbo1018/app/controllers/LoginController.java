@@ -38,7 +38,7 @@ public class LoginController {
         try {
             Account account = accountService.login(email, password);
             session.setAttribute("accountId", account.getId());
-            return "home";
+            return "redirect:/";
        } catch (IllegalArgumentException e) {
             model.addAttribute("errorMessage", messageSource.getMessage("login.data", null, locale));
             return "home";

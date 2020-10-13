@@ -2,21 +2,20 @@ package ru.ikbo1018.app.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.ikbo1018.app.models.account.Account;
+import ru.ikbo1018.app.models.account.Moderator;
+import ru.ikbo1018.app.models.account.User;
 import ru.ikbo1018.app.services.AccountService;
-import ru.ikbo1018.app.validators.AccountValidator;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -32,7 +31,7 @@ public class LkController {
     private Validator accountValidator;
 
     @InitBinder("accountInfo")
-    public void dataBinder(WebDataBinder webDataBinder) {
+    public void dataBind(WebDataBinder webDataBinder) {
         webDataBinder.addValidators(accountValidator);
     }
 
@@ -52,8 +51,7 @@ public class LkController {
     }
 
     @PostMapping(value = "/update")
-    public String updateAccount(@Validated @ModelAttribute(name = "accountInfo") Account accountInfo, BindingResult result,
-                                HttpSession session, RedirectAttributes redirectAttributes) {
+    public String updateAccount(@Validated @ModelAttribute("accountInfo") User accountInfo, BindingResult result, HttpSession session, RedirectAttributes redirectAttributes) {
         if(result.getFieldErrorCount("firstName") > 0 || result.getFieldErrorCount("lastName") > 0
                 || result.getFieldErrorCount("midName") > 0) {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.accountInfo", result);
