@@ -20,22 +20,22 @@
                 <h1>Создать аккаунт</h1>
                 <h2>Быстро и легко.</h2>
             </div>
-           <form:form modelAttribute="account">
+            <form:form modelAttribute="account">
                <c:if test="${error != null}">
                    <c:out value="${error}" /><br/>
                </c:if>
-               Имя:<form:input path="firstName" />
+               <form:input placeholder="Имя" path="firstName" />
                <form:errors path="firstName" /><br/>
-               Фамилия:<form:input path="lastName" />
+               <form:input placeholder="Фамилия" path="lastName" />
                <form:errors path="lastName" /><br/>
-               Отчество:<form:input path="midName" />
+               <form:input placeholder="Отчество" path="midName" />
                <forn:errors path="midName" /><br/>
-               Адрес электронной почты:<form:input path="email" />
+               <form:input placeholder="Адрес электронной почты" path="email" />
                <form:errors path="email"/><br/>
-               Пароль:<form:input path="password" type="password" />
+               <form:input placeholder="Пароль" path="password" type="password" />
                <form:errors path="password" /> <br/>
                <button type="submit">Отправить</button>
-           </form:form>
+            </form:form>
             <div class="log_part">
                 <p>Есть аккаунт?</p>
                 <a href="/">Войти</a>

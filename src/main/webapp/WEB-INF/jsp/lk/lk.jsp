@@ -21,18 +21,23 @@
                 <form:errors path="lastName" />
                 <form:errors path="midName" />
                 <div class="firstName">
+                    <label for="firstName">Имя:</label>
                     <form:input path="firstName"/>
                 </div>
                 <div class="lastName">
+                    <label for="lastName">Фамилия:</label>
                     <form:input path="lastName" />
                 </div>
                 <div class="midName">
+                    <label for="midName">Отчество:</label>
                     <form:input path="midName" />
                 </div>
                 <div class="email">
+                    <label for="email">Почта:</label>
                     <form:input path="email" readonly="true"/>
                 </div>
                 <div class="regDate">
+                    <label for="regDate">Дата регистрации:</label>
                     <form:input path="regDate" readonly="true"/>
                 </div>
                 <div class="buttons">

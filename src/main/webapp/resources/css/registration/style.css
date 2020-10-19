@@ -87,7 +87,7 @@ nav {
 }
 /**/
 
-.button {
+button {
     background: #fed136;
     display: block;
     color: #484543;
@@ -101,7 +101,7 @@ nav {
     text-transform: uppercase;
     font-weight: bold;
     font-size: 14px;
-    float: left;
+    /*float: left;*/
 }
 
 .title h1 {
@@ -119,8 +119,9 @@ nav {
     margin: 10px;
 }
 
-.fields input {
+#account input {
     padding: 5px;
+    width: 200px;
     margin: 10px;
 }
 

@@ -103,9 +103,10 @@ nav {
     width: 50%;
 }
 
+/*
 form div {
-    display: inline-block;
-}
+    /display: inline-block;
+}*/
 
 label {
     width: 140px;
@@ -126,6 +127,7 @@ form .buttons {
 form div {
     margin-top: 10px;
 }
+
 
 #error_field {
     width: 300px;

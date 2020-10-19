@@ -13,18 +13,15 @@
 <section id="main">
     <div class="container">
         <form id="form" enctype="multipart/form-data" method="post">
-            Выберите тип нарушения:
             <select name="typeId">
+                <option selected disabled>Выберите тип нарушения</option>
                 <c:forEach items="${types}" var="type">
                     <option value="${type.getId()}">${type.getName()}</option>
                 </c:forEach>
-            </select><br/>
-            Введите адрес нарушения:
-            <input type="text" name="address"/><br/>
-            Опишите суть нарушения:
-            <textarea name="appeal_text"></textarea><br/>
-            Загрузите доказательства:
-            <input type="file" name="files" multiple/>
+            </select>
+            <input type="text" size=33 placeholder="Введите адрес нарушения" name="address"/>
+            <textarea rows=10 cols=35 placeholder="Опишите суть нарушения" name="appeal_text"></textarea>
+            <input type="file" class="files" name="files" accept="image/*" title="Загрузите фотографии" size="25" multiple/>
             <input type="submit">
         </form>
     </div>
